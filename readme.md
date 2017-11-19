@@ -6,7 +6,7 @@
 $ npm install --global nm-prune
 ```
 
-<div style="text-align:center"><img src="https://i.imgur.com/Pc1nUZp.gif"></div>
+<img src="https://i.imgur.com/Pc1nUZp.gif" width="362">
 
 ## Customizing files and folders to be pruned
 
