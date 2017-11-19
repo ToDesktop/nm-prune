@@ -14,7 +14,7 @@ nmPrune.prep(process.cwd()).then(info =>
   new Promise((resolve) => {
     log(`Pruning ${info.modulePath}`);
     if (info.usingCustomPrune) {
-      log(`Using custom prune: ${info.customPrunePath}`);
+      log(`Using custom prune: ${info.prunePath}`);
     }
     const q = new Confirm(`Delete ${info.fileCount} files (${prettyBytes(info.size)}) and ${info.dirCount} folders`);
     q.ask(resolve);

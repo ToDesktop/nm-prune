@@ -5,23 +5,23 @@ const fs = require('fs-extra');
 
 const prep = (projectPath) => {
   const root = findRoot(projectPath);
-  let pruneFile = null;
+  let pruneJson = null;
   let usingCustomPrune = false;
-  let customPrunePath = '';
-  customPrunePath = path.join(root, 'prune.json');
+  let prunePath = path.join(root, 'prune.json');
 
   try {
-    pruneFile = fs.readJsonSync(customPrunePath);
+    pruneJson = fs.readJsonSync(prunePath);
     usingCustomPrune = true;
   } catch (e) {
-    pruneFile = fs.readJsonSync(path.join(__dirname, 'default-prune.json'));
+    prunePath = path.join(__dirname, 'default-prune.json');
+    pruneJson = fs.readJsonSync(prunePath);
   }
 
   const shouldPruneFile = pth =>
-    (pruneFile.files || []).includes(path.basename(pth)) ||
-    (pruneFile.extensions || []).includes(path.extname(pth));
+    (pruneJson.files || []).includes(path.basename(pth)) ||
+    (pruneJson.extensions || []).includes(path.extname(pth));
 
-  const shouldPruneDir = pth => (pruneFile.directories || []).includes(path.basename(pth));
+  const shouldPruneDir = pth => (pruneJson.directories || []).includes(path.basename(pth));
 
   const modulePath = path.join(root, 'node_modules');
 
@@ -46,7 +46,7 @@ const prep = (projectPath) => {
   const onFinish = () => ({
     modulePath,
     usingCustomPrune,
-    customPrunePath,
+    prunePath,
     size,
     files,
     fileCount,
