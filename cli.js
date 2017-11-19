@@ -12,6 +12,7 @@ log('Scanning node_modules…\n');
 
 nmPrune.prep(process.cwd()).then(info =>
   new Promise((resolve) => {
+    log(`Pruning ${info.modulePath}`);
     if (info.usingCustomPrune) {
       log(`Using custom prune: ${info.customPrunePath}`);
     }

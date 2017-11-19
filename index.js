@@ -17,7 +17,13 @@ const prep = (projectPath) => {
     pruneFile = fs.readJsonSync(path.join(__dirname, 'default-prune.json'));
   }
 
-  const nm = path.join(root, 'node_modules');
+  const shouldPruneFile = pth =>
+    (pruneFile.files || []).includes(path.basename(pth)) ||
+    (pruneFile.extensions || []).includes(path.extname(pth));
+
+  const shouldPruneDir = pth => (pruneFile.directories || []).includes(path.basename(pth));
+
+  const modulePath = path.join(root, 'node_modules');
 
   let size = 0;
   let fileCount = 0;
@@ -25,41 +31,30 @@ const prep = (projectPath) => {
   const files = [];
   const dirs = [];
 
-  return new Promise((resolve) => {
-    walk(
-      nm,
-      (pth, stats) => {
-        if (stats.isFile()) {
-          if (
-            (pruneFile.files || []).includes(path.basename(pth)) ||
-            (pruneFile.extensions || []).includes(path.extname(pth))
-          ) {
-            size += stats.size;
-            fileCount += 1;
-            files.push(path.join(root, pth));
-          }
-        }
-        if (stats.isDirectory()) {
-          if ((pruneFile.directories || []).includes(path.basename(pth))) {
-            dirCount += 1;
-            dirs.push(path.join(root, pth));
-          }
-        }
-      },
-      true,
-      () => {
-        resolve({
-          usingCustomPrune,
-          customPrunePath,
-          size,
-          files,
-          fileCount,
-          dirs,
-          dirCount,
-        });
-      },
-    );
+  const process = (pth, stats) => {
+    if (stats.isFile() && shouldPruneFile(pth)) {
+      size += stats.size;
+      fileCount += 1;
+      files.push(path.join(root, pth));
+    }
+    if (stats.isDirectory() && shouldPruneDir(pth)) {
+      dirCount += 1;
+      dirs.push(path.join(root, pth));
+    }
+  };
+
+  const onFinish = () => ({
+    modulePath,
+    usingCustomPrune,
+    customPrunePath,
+    size,
+    files,
+    fileCount,
+    dirs,
+    dirCount,
   });
+
+  return new Promise(resolve => walk(modulePath, process, true, () => resolve(onFinish())));
 };
 
 module.exports = {
