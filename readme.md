@@ -1,6 +1,6 @@
 # nm-prune [![Build Status](https://travis-ci.org/pingyhq/nm-prune.svg?branch=master)](https://travis-ci.org/DaveJ/nm-prune)
 
-> Prune unneeded files from node_modules folder. Super handy for Elecron and AWS Lambda.
+> Prune unneeded files (.md, .td, etc..) from node_modules folder. Super handy for Electron and AWS Lambda.
 
 ```
 $ npm install --global nm-prune
