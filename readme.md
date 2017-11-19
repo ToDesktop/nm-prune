@@ -1,4 +1,4 @@
-# nm-prune [![Build Status](https://travis-ci.org/pingyhq/nm-prune.svg?branch=master)](https://travis-ci.org/DaveJ/nm-prune)
+# nm-prune [![Build Status](https://travis-ci.org/pingyhq/nm-prune.svg?branch=master)](https://travis-ci.org/pingyhq/nm-prune)
 
 > Prune unneeded files (.md, .td, etc..) from node_modules folder. Super handy for Electron and AWS Lambda.
 
