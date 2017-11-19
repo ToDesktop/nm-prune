@@ -1,9 +1,10 @@
 {
   "name": "nm-prune",
   "version": "1.0.0",
-  "description": "Prune unneeded files (.md, .td, etc..) from node_modules folder. Super handy for Electron and AWS Lambda.",
+  "description":
+    "Prune unneeded files (.md, .td, etc..) from node_modules folder. Super handy for Electron and AWS Lambda.",
   "license": "MIT",
-  "repository": "DaveJ/nm-prune",
+  "repository": "pingyhq/nm-prune",
   "author": {
     "name": "DaveJ",
     "email": "dave@davejeffery.com",
@@ -16,19 +17,8 @@
   "scripts": {
     "test": "eslint ."
   },
-  "files": [
-    "index.js",
-    "cli.js",
-    "default-prune.json"
-  ],
-  "keywords": [
-    "cli-app",
-    "cli",
-    "prune",
-    "node_modules",
-    "lambda",
-    "electron"
-  ],
+  "files": ["index.js", "cli.js", "default-prune.json"],
+  "keywords": ["cli-app", "cli", "prune", "node_modules", "lambda", "electron"],
   "dependencies": {
     "find-root": "^1.1.0",
     "fs-extra": "^4.0.2",

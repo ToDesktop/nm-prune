@@ -1,4 +1,4 @@
-# nm-prune [![Build Status](https://travis-ci.org/DaveJ/nm-prune.svg?branch=master)](https://travis-ci.org/DaveJ/nm-prune)
+# nm-prune [![Build Status](https://travis-ci.org/pingyhq/nm-prune.svg?branch=master)](https://travis-ci.org/DaveJ/nm-prune)
 
 > Prune unneeded files from node_modules folder. Super handy for Elecron and AWS Lambda.
 
