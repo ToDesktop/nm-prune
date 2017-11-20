@@ -15,7 +15,7 @@
     "node": ">=4"
   },
   "scripts": {
-    "test": "eslint . && preview && ava"
+    "test": "preview && eslint . && ava"
   },
   "files": ["index.js", "cli.js", "default-prune.json"],
   "keywords": ["cli-app", "cli", "prune", "node_modules", "lambda", "electron"],
