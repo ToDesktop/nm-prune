@@ -9,14 +9,23 @@ const meow = require('meow');
 const cli = meow(
   `
 Usage
-  $ npm-prune <input>
+  $ nm-prune <input>
 
 Options
   -f, --force  Skip confirmation and run
 
 Examples
-  $ nm-prune
-  🌈 unicorns 🌈
+  $ nm-prune --force
+  Scanning node_modules…
+  
+  Pruning /Users/dave/code/nm-prune/node_modules
+  Delete 1773 files (6.54 MB) and 126 folders
+
+  Removing files…
+  ✔ Files removed
+  
+  Removing directories…
+  ✔ Directories removed
 `,
   {
     alias: {
@@ -53,6 +62,7 @@ nmPrune.prep(process.cwd()).then(info =>
       return null;
     }
     log('\nRemoving files…');
+    log(info.files.map(fullPath => fs.remove(fullPath)));
     return Promise.all(info.files.map(fullPath => fs.remove(fullPath)))
       .then(() => {
         log('✔ Files removed\n');
@@ -61,5 +71,6 @@ nmPrune.prep(process.cwd()).then(info =>
       })
       .then(() => {
         log('✔ Directories removed');
-      });
+      })
+      .catch(e => log(e));
   }));

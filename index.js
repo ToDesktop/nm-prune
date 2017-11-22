@@ -35,11 +35,11 @@ const prep = (projectPath) => {
     if (stats.isFile() && shouldPruneFile(pth)) {
       size += stats.size;
       fileCount += 1;
-      files.push(path.join(root, pth));
+      files.push(path.join(modulePath, pth));
     }
     if (stats.isDirectory() && shouldPruneDir(pth)) {
       dirCount += 1;
-      dirs.push(path.join(root, pth));
+      dirs.push(path.join(modulePath, pth));
     }
   };
 
