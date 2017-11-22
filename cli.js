@@ -4,6 +4,28 @@ const nmPrune = require('.');
 const Confirm = require('prompt-confirm');
 const prettyBytes = require('pretty-bytes');
 const fs = require('fs-extra');
+const meow = require('meow');
+
+const cli = meow(
+  `
+Usage
+  $ npm-prune <input>
+
+Options
+  -f, --force  Skip confirmation and run
+
+Examples
+  $ nm-prune
+  🌈 unicorns 🌈
+`,
+  {
+    alias: {
+      f: 'force',
+    },
+  },
+);
+
+const force = !!cli.flags.force;
 
 // eslint-disable-next-line no-console
 const log = str => console.log(str);
@@ -16,8 +38,15 @@ nmPrune.prep(process.cwd()).then(info =>
     if (info.usingCustomPrune) {
       log(`Using custom prune: ${info.prunePath}`);
     }
-    const q = new Confirm(`Delete ${info.fileCount} files (${prettyBytes(info.size)}) and ${info.dirCount} folders`);
-    q.ask(resolve);
+    const q = `Delete ${info.fileCount} files (${prettyBytes(info.size)}) and ${
+      info.dirCount
+    } folders`;
+    if (force) {
+      log(q);
+      return resolve(true);
+    }
+    const question = new Confirm(q);
+    return question.ask(resolve);
   }).then((doDelete) => {
     if (!doDelete) {
       log('Ok, nothing has changed');
