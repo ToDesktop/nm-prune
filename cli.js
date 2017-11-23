@@ -31,7 +31,7 @@ Examples
     alias: {
       f: 'force',
     },
-  },
+  }
 );
 
 const force = !!cli.flags.force;
