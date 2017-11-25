@@ -5,8 +5,11 @@
     "Gruntfile.js",
     ".tern-project",
     ".gitattributes",
+    ".gitignore",
+    ".npmignore",
     ".editorconfig",
     ".eslintrc",
+    ".eslintignore",
     ".jshintrc",
     ".flowconfig",
     ".documentup.json",
@@ -16,7 +19,18 @@
     "LICENSE",
     "AUTHORS",
     "CONTRIBUTORS",
-    ".yarn-integrity"
+    "Contributors",
+    "CONTRIBUTING",
+    "CHANGES",
+    "CHANGELOG",
+    ".yarn-integrity",
+    "jsdoc.json",
+    ".nvmrc",
+    ".zuul.yml",
+    ".doclets.yml",
+    ".tern-project",
+    ".dockerignore",
+    ".dir-locals.el"
   ],
   "directories": [
     "__tests__",
@@ -33,5 +47,5 @@
     "coverage",
     ".nyc_output"
   ],
-  "extensions": [".md", ".ts", ".jst", ".coffee"]
+  "extensions": [".md", ".ts", ".jst", ".coffee", "*.1", "*.patch", "*~"]
 }
