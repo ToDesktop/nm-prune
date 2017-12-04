@@ -62,7 +62,6 @@ nmPrune.prep(process.cwd()).then(info =>
       return null;
     }
     log('\nRemoving files…');
-    log(info.files.map(fullPath => fs.remove(fullPath)));
     return Promise.all(info.files.map(fullPath => fs.remove(fullPath)))
       .then(() => {
         log('✔ Files removed\n');
