@@ -1,6 +1,6 @@
 {
   "name": "nm-prune",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Prune unneeded files (.md, .td, etc..) from node_modules folder. Super handy for Electron and AWS Lambda.",
   "license": "MIT",
   "repository": "pingyhq/nm-prune",
