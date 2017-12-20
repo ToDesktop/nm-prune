@@ -18,10 +18,11 @@ const prep = (projectPath) => {
   }
 
   const shouldPruneFile = pth =>
-    (pruneJson.files || []).includes(path.basename(pth)) ||
-    (pruneJson.extensions || []).includes(path.extname(pth));
+    (pruneJson.files || []).includes(path.basename(pth).toLowerCase()) ||
+    (pruneJson.extensions || []).includes(path.extname(pth).toLowerCase());
 
-  const shouldPruneDir = pth => (pruneJson.directories || []).includes(path.basename(pth));
+  const shouldPruneDir = pth =>
+    (pruneJson.directories || []).includes(path.basename(pth).toLowerCase());
 
   const modulePath = path.join(root, 'node_modules');
 
