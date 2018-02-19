@@ -25,7 +25,7 @@ If you want `nm-prune` to run without asking for confirmation then you can run
 
 ## Discard license files
 
-By default `nm-prune` v3 does not discard license files because that would
+By default `nm-prune` v4+ does not discard license files because that would
 violate the terms of most licenses. If you wish to prune them anyway then you
 can run the command `nm-prune --prune-license`.
 
