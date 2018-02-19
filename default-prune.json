@@ -17,7 +17,6 @@
     ".travis.yml",
     "authors",
     "contributors",
-    "contributors",
     "contributing",
     "changes",
     "changelog",
@@ -26,7 +25,6 @@
     ".nvmrc",
     ".zuul.yml",
     ".doclets.yml",
-    ".tern-project",
     ".dockerignore",
     ".dir-locals.el"
   ],
