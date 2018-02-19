@@ -23,6 +23,12 @@ instead.
 If you want `nm-prune` to run without asking for confirmation then you can run
 `nm-prune --force`.
 
+## Discard license files
+
+By default `nm-prune` v3 does not discard license files because that would
+violate the terms of most licenses. If you wish to prune them anyway then you
+can run the command `nm-prune --prune-license`.
+
 ## License
 
 MIT © [DaveJ](https://github.com/davej)

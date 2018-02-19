@@ -3,7 +3,7 @@ const path = require('path');
 const findRoot = require('find-root');
 const fs = require('fs-extra');
 
-const prep = (projectPath) => {
+const prep = (projectPath, options = {}) => {
   const root = findRoot(projectPath);
   let pruneJson = null;
   let usingCustomPrune = false;
@@ -17,30 +17,34 @@ const prep = (projectPath) => {
     pruneJson = fs.readJsonSync(prunePath);
   }
 
-  const shouldPruneFile = pth =>
-    (pruneJson.files || []).includes(path.basename(pth).toLowerCase()) ||
-    (pruneJson.extensions || []).includes(path.extname(pth).toLowerCase());
+  let files = pruneJson.files || [];
+  const extensions = pruneJson.extensions || [];
+  const directories = pruneJson.directories || [];
+  if (options.pruneLicense) files = files.concat(pruneJson.licenses || []);
 
-  const shouldPruneDir = pth =>
-    (pruneJson.directories || []).includes(path.basename(pth).toLowerCase());
+  const shouldPruneFile = pth =>
+    files.includes(path.basename(pth).toLowerCase()) ||
+    extensions.includes(path.extname(pth).toLowerCase());
+
+  const shouldPruneDir = pth => directories.includes(path.basename(pth).toLowerCase());
 
   const modulePath = path.join(root, 'node_modules');
 
   let size = 0;
   let fileCount = 0;
   let dirCount = 0;
-  const files = [];
-  const dirs = [];
+  const filesToPrune = [];
+  const dirsToPrune = [];
 
   const process = (pth, stats) => {
     if (stats.isFile() && shouldPruneFile(pth)) {
       size += stats.size;
       fileCount += 1;
-      files.push(path.join(modulePath, pth));
+      filesToPrune.push(path.join(modulePath, pth));
     }
     if (stats.isDirectory() && shouldPruneDir(pth)) {
       dirCount += 1;
-      dirs.push(path.join(modulePath, pth));
+      dirsToPrune.push(path.join(modulePath, pth));
     }
   };
 
@@ -49,9 +53,9 @@ const prep = (projectPath) => {
     usingCustomPrune,
     prunePath,
     size,
-    files,
+    files: filesToPrune,
     fileCount,
-    dirs,
+    dirs: dirsToPrune,
     dirCount,
   });
 

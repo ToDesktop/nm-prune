@@ -15,8 +15,6 @@
     ".documentup.json",
     ".yarn-metadata.json",
     ".travis.yml",
-    "license.txt",
-    "license",
     "authors",
     "contributors",
     "contributors",
@@ -32,6 +30,7 @@
     ".dockerignore",
     ".dir-locals.el"
   ],
+  "licenses": ["license.txt", "license.md", "license"],
   "directories": [
     "__tests__",
     "test",
