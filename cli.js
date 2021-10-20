@@ -29,9 +29,15 @@ Examples
   ✔ Directories removed
 `,
   {
-    alias: {
-      f: 'force',
-      l: 'prune-license',
+    flags: {
+      force: {
+        type: 'boolean',
+        alias: 'f',
+      },
+      'prune-license': {
+        type: 'boolean',
+        alias: 'l',
+      },
     },
   }
 );
