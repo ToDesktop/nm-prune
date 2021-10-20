@@ -30,11 +30,11 @@
     "electron"
   ],
   "dependencies": {
+    "enquirer": "^2.3.6",
     "find-root": "^1.1.0",
     "fs-extra": "^4.0.2",
     "meow": "^9.0.0",
     "pretty-bytes": "^4.0.2",
-    "prompt-confirm": "^1.2.0",
     "walk-filtered": "^0.9.3"
   },
   "devDependencies": {
