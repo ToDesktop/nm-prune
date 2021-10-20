@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const nmPrune = require('.');
-const Confirm = require('prompt-confirm');
+const { Confirm, } = require('enquirer');
 const prettyBytes = require('pretty-bytes');
 const fs = require('fs-extra');
 const meow = require('meow');
@@ -29,9 +29,17 @@ Examples
   ✔ Directories removed
 `,
   {
-    alias: {
-      f: 'force',
-      l: 'prune-license',
+    flags: {
+      force: {
+        type: 'boolean',
+        alias: 'f',
+        default: false,
+      },
+      pruneLicense: {
+        type: 'boolean',
+        alias: 'l',
+        default: false,
+      },
     },
   }
 );
@@ -50,15 +58,15 @@ nmPrune.prep(process.cwd(), { pruneLicense, }).then(info =>
     if (info.usingCustomPrune) {
       log(`Using custom prune: ${info.prunePath}`);
     }
-    const q = `Delete ${info.fileCount} files (${prettyBytes(info.size)}) and ${
+    const message = `Delete ${info.fileCount} files (${prettyBytes(info.size)}) and ${
       info.dirCount
     } folders`;
     if (force) {
-      log(q);
+      log(message);
       return resolve(true);
     }
-    const question = new Confirm(q);
-    return question.ask(resolve);
+    const question = new Confirm({ message, });
+    return question.run().then(resolve);
   }).then((doDelete) => {
     if (!doDelete) {
       log('Ok, nothing has changed');

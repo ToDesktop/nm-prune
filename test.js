@@ -1,7 +1,7 @@
-import path from 'path';
-import test from 'ava';
+const path = require('path');
+const test = require('ava');
 // eslint-disable-next-line import/no-extraneous-dependencies
-import m from 'nm-prune';
+const m = require('nm-prune');
 
 let fileCountWithoutLicenses = 0;
 test('sanity test', t =>
