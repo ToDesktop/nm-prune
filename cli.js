@@ -66,7 +66,9 @@ nmPrune.prep(process.cwd(), { pruneLicense, }).then(info =>
       return resolve(true);
     }
     const question = new Confirm({ message, });
-    return question.run().then(resolve);
+    return question.run().then(resolve, (err) => {
+      log(err);
+    });
   }).then((doDelete) => {
     if (!doDelete) {
       log('Ok, nothing has changed');
