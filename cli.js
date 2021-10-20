@@ -33,10 +33,12 @@ Examples
       force: {
         type: 'boolean',
         alias: 'f',
+        default: false,
       },
-      'prune-license': {
+      pruneLicense: {
         type: 'boolean',
         alias: 'l',
+        default: false,
       },
     },
   }
